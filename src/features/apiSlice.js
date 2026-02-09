@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const idiomsApi = createApi({
   reducerPath: 'idiomsApi',
-  // Используем переменную окружения для гибкости между локальной разработкой и деплоем
+ 
   baseQuery: fetchBaseQuery({ 
     baseUrl: `${import.meta.env.VITE_API_URL}/api/` 
   }),
@@ -10,7 +10,7 @@ export const idiomsApi = createApi({
 
   endpoints: (builder) => ({
     
-    // 1. Получение всех идиом (GET) 
+    // 1.  (GET) 
     getIdioms: builder.query({
       query: (token) => ({
         url: 'idioms',
@@ -22,7 +22,7 @@ export const idiomsApi = createApi({
       providesTags: ['Idioms'],
     }),
 
-    // 2. Добавление новой идиомы (POST)
+    // 2.  (POST)
     addIdiom: builder.mutation({
       query: ({ body, token }) => ({
         url: 'idioms',
@@ -35,7 +35,7 @@ export const idiomsApi = createApi({
       invalidatesTags: ['Idioms'],
     }),
 
-    // 3. Удаление идиомы (DELETE)
+    // 3.  (DELETE)
     deleteIdiom: builder.mutation({
       query: ({ id, token }) => ({
         url: `idioms/${id}`,
