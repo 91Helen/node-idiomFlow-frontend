@@ -1,0 +1,1629 @@
+/* =========================================
+   1. БАЗОВЫЕ НАСТРОЙКИ И ШРИФТЫ
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fcfcfd;
+  color: #2d3436;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .navbar-brand a {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.app-container {
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   2. НАВИГАЦИЯ (NAVBAR)
+   ========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.navbar-brand a {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #646cff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #636e72;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover, .navbar-links a.active {
+  color: #646cff;
+}
+
+.nav-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #646cff;
+}
+
+/* =========================================
+   3. ГЛАВНАЯ СТРАНИЦА 
+   ========================================= */
+.app-header {
+  text-align: center;
+  margin: 60px 0 40px;
+}
+
+.app-header h1 {
+  background: linear-gradient(135deg, #646cff 0%, #4A90E2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 2px 10px rgba(100, 108, 255, 0.1));
+}
+
+.app-header p {
+  color: #636e72;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Поиск  */
+.search-box {
+  max-width: 100%;
+  margin: 0 auto 50px;
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 20px 30px;
+  font-size: 1.1rem;
+  border: 2px solid #f0f0f0;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  outline: none;
+  font-weight: 500;
+}
+
+.search-box input:focus {
+  border-color: #646cff;
+  box-shadow: 0 15px 35px rgba(100, 108, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.search-box input::placeholder {
+  color: #b2bec3;
+}
+
+/* =========================================
+   4. СЕТКА И КАРТОЧКИ (PREMIUM STYLE)
+   ========================================= */
+.idioms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding-bottom: 50px;
+}
+
+.idiom-card {
+  background: white;
+  border-radius: 28px;
+  border: 1px solid #f1f2f6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 520px; 
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+}
+
+.idiom-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(100, 108, 255, 0.15);
+  border-color: rgba(100, 108, 255, 0.2);
+}
+
+.idiom-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Эффект зума при наведении на всю карточку */
+.idiom-card:hover .idiom-img {
+  transform: scale(1.1);
+}
+
+.idiom-main-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.idiom-phrase {
+  font-size: 1.5rem;
+  font-weight: 850;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.idiom-meaning {
+  color: #57606f;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.idiom-example {
+  margin-top: auto;
+  padding: 15px;
+  background: #f8faff;
+  border-left: 5px solid #646cff;
+  border-radius: 8px;
+  font-style: italic;
+  color: #2d3436;
+  font-size: 0.95rem;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.idiom-footer {
+  padding: 15px 25px;
+  background: #ffffff;
+  border-top: 1px solid #f8f9fa;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* =========================================
+   4. СЕТКА И КАРТОЧКИ (ГЛАВНАЯ + ПРОФИЛЬ)
+   ========================================= */
+.idioms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.idiom-card {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.idiom-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(100, 108, 255, 0.12);
+  border-color: #646cff55;
+}
+
+.idiom-image-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.idiom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.idiom-card:hover .idiom-img {
+  transform: scale(1.08);
+}
+
+.idiom-main-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.idiom-phrase {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.idiom-example {
+  margin-top: 15px;
+  padding: 12px;
+  background: #f8faff;
+  border-left: 4px solid #646cff;
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.idiom-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #f9f9f9;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* =========================================
+   5. ТРЕНАЖЕР (RANDOM IDIOM) — ВЕРНУЛИ КРАСОТУ
+   ========================================= */
+.random-page-wrapper {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trainer-card {
+  background: white;
+  width: 100%;
+  padding: 35px;
+  border-radius: 30px; 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); 
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+/* Обвертка для картинки с легким свечением */
+.random-image-wrapper {
+  width: 100%;
+  height: 320px; 
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.random-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Текст фразы  */
+.random-phrase-display {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.4rem;
+  background: linear-gradient(90deg, #646cff, #4a90e2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  margin: 20px 0;
+  line-height: 1.2;
+}
+
+/* Стилизация перевода */
+.meaning-section {
+  text-align: left;
+  background: #f8faff;
+  padding: 25px;
+  border-radius: 18px;
+  border-left: 6px solid #646cff;
+  margin-top: 15px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.idiom-meaning strong {
+  color: #646cff;
+}
+
+/* Кнопка "Следующая" */
+.next-phrase-btn {
+  margin-top: 30px;
+  background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.next-phrase-btn:hover {
+  background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(100, 108, 255, 0.3);
+}
+
+/* Счетчик лимита для гостей */
+.limit-counter {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+/* =========================================
+   6. СТАРТОВЫЙ ЭКРАН ТРЕНАЖЕРА (UPGRADED)
+   ========================================= */
+.start-screen {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 35px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  max-width: 550px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративный элемент на фоне */
+.start-screen::before {
+  content: '🎲';
+  position: absolute;
+  font-size: 10rem;
+  top: -30px;
+  left: -30px;
+  opacity: 0.05;
+  transform: rotate(-15deg);
+}
+
+.start-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+/* бейдж лимита */
+.promo-hint {
+  font-size: 0.9rem;
+  color: #646cff;
+  background: #f0f1ff;
+  padding: 8px 20px;
+  border-radius: 100px;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(100, 108, 255, 0.1);
+}
+
+/* кнопка "Начать" */
+.start-screen .add-idiom-button {
+  background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
+  color: white;
+  padding: 20px 60px;
+  font-size: 1.3rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  box-shadow: 0 15px 30px rgba(100, 108, 255, 0.35);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: auto; 
+}
+
+.start-screen .add-idiom-button:hover {
+  transform: scale(1.08) translateY(-5px);
+  box-shadow: 0 20px 40px rgba(100, 108, 255, 0.45);
+}
+
+.start-screen .add-idiom-button:active {
+  transform: scale(0.95);
+}
+
+/* эмодзи в заголовке */
+.trainer-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #2d3436, #636e72);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 35px;
+}
+/* =========================================
+   7. ПРОМО-КАРТОЧКА (PAYWALL) & СТАРТ
+   ========================================= */
+.promo-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%) !important;
+  padding: 50px !important;
+  animation: fadeIn 0.5s ease;
+}
+
+.promo-icon {
+  font-size: 5rem;
+  animation: rocket-float 3s ease-in-out infinite;
+}
+
+@keyframes rocket-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.start-screen {
+  background: white;
+  padding: 50px;
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.promo-hint {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  background: #f3f4f6;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+/* =========================================
+   7. КНОПКИ И ОБЩИЕ КЛАССЫ
+   ========================================= */
+.add-idiom-button {
+  background: #646cff;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.add-idiom-button:hover {
+  background: #535bf2;
+  transform: scale(1.02);
+}
+
+.delete-btn {
+  background: #fff5f5;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f33;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background: #ff4d4f;
+  color: white;
+}
+/* =========================================
+   9. СТИЛИ ДЛЯ ВХОДА / ВЫХОДА (AUTH0)
+   ========================================= */
+
+/* Контейнер для кнопок в набаре */
+.nav-user-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Общий стиль для кнопок авторизации */
+.auth-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  border: none;
+}
+
+/* Кнопка Войти */
+.auth-btn.login {
+  background: #646cff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.2);
+}
+
+.auth-btn.login:hover {
+  background: #535bf2;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(100, 108, 255, 0.3);
+}
+
+/* Кнопка Выйти */
+.auth-btn.logout {
+  background: transparent;
+  color: #636e72;
+  border: 1px solid #dcdde1;
+}
+
+.auth-btn.logout:hover {
+  background: #fff1f0;
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
+/* Ссылка на профиль в навбаре */
+.nav-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #2d3436;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.nav-profile-link:hover {
+  background: #f1f2f6;
+}
+
+.nav-username {
+  font-size: 0.9rem;
+}
+
+/* =========================================
+   10. ЛИЧНЫЙ КАБИНЕТ (PROFILE PAGE)
+   ========================================= */
+
+.profile-page-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Карточка пользователя с эффектом глубины */
+.profile-user-card {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f2f6;
+  margin-bottom: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративный акцент на фоне профиля */
+.profile-user-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(100, 108, 255, 0.03), transparent);
+  pointer-events: none;
+}
+
+.profile-main-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 5px solid #f0f1ff;
+  object-fit: cover;
+  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.profile-main-avatar:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.profile-info-content {
+  flex-grow: 1;
+}
+
+.profile-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 5px 0;
+}
+
+.profile-email-text {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  display: block;
+}
+
+/* Статистика  */
+.profile-stats-row {
+  display: flex;
+  gap: 30px;
+}
+
+.stat-item {
+  background: #f8faff;
+  padding: 15px 25px;
+  border-radius: 18px;
+  border: 1px solid #f0f1ff;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: #ffffff;
+  border-color: #646cff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.08);
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #646cff;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+
+/* Заголовок секции "Мои идиомы" */
+.profile-content-divider {
+  margin-top: 20px;
+  margin-bottom: 35px;
+  border-bottom: 2px solid #f1f2f6;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2d3436;
+  margin: 0;
+}
+
+/* =========================================
+   11. ФОРМА ДОБАВЛЕНИЯ (ADD IDIOM PAGE)
+   ========================================= */
+
+.add-idiom-container {
+  background: white;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f2f6;
+  max-width: 700px;
+  margin: 40px auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.add-idiom-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+  text-align: center;
+  background: linear-gradient(90deg, #2d3436, #646cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.add-idiom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Стилизация подписей к полям */
+.form-label {
+  font-weight: 700;
+  color: #636e72;
+  font-size: 0.9rem;
+  margin-bottom: -15px;
+  margin-left: 5px;
+}
+
+.add-idiom-input, 
+.add-idiom-textarea,
+.add-idiom-select {
+  padding: 18px 25px;
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #fcfcfd;
+  width: 100%;
+  outline: none;
+}
+
+.add-idiom-input:focus, 
+.add-idiom-textarea:focus,
+.add-idiom-select:focus {
+  border-color: #646cff;
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Стилизация выпадающего списка (категорий) */
+.add-idiom-select {
+  cursor: pointer;
+  appearance: none; 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23646cff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 18px;
+}
+
+.add-idiom-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Кнопка "Сохранить"  */
+.add-idiom-button {
+  margin-top: 10px;
+  padding: 20px;
+  background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 800;
+  box-shadow: 0 10px 25px rgba(100, 108, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.add-idiom-button:hover:not(:disabled) {
+  transform: scale(1.02) translateY(-3px);
+  box-shadow: 0 15px 35px rgba(100, 108, 255, 0.4);
+}
+
+.add-idiom-button:active {
+  transform: scale(0.98);
+}
+
+.add-idiom-button:disabled {
+  background: #d1d5db;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* =========================================
+   12. КВИЗ (СИНХРОНИЗИРОВАНО С JSX)
+   ========================================= */
+
+.quiz-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); 
+  padding: 20px;
+}
+
+.quiz-card {
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 550px;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid #f1f2f6;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Шапка квиза */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.quiz-progress {
+  font-weight: 700;
+  color: #636e72;
+  font-size: 0.95rem;
+  background: #f8f9fa;
+  padding: 6px 15px;
+  border-radius: 12px;
+}
+
+.quiz-score-badge {
+  background: #e0e7ff;
+  color: #646cff;
+  padding: 6px 15px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+/* Таймер */
+.timer-section {
+  margin-bottom: 30px;
+}
+
+.timer-text {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.timer-container {
+  width: 100%;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.timer-bar {
+  height: 100%;
+  transition: width 1s linear, background-color 0.3s ease;
+}
+
+/* Контент вопроса */
+.quiz-image-wrapper {
+  width: 100%;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.quiz-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quiz-phrase {
+  font-size: 1.8rem;
+  font-weight: 850;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+/* Варианты ответов */
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.option-btn {
+  background: #ffffff;
+  border: 2px solid #f0f0f0;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2d3436;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', sans-serif;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: #646cff;
+  background: #f8faff;
+  transform: translateY(-2px);
+}
+
+
+.option-btn.correct {
+  background: #22c55e !important;
+  color: white !important;
+  border-color: #22c55e !important;
+}
+
+.option-btn.wrong {
+  background: #ef4444 !important;
+  color: white !important;
+  border-color: #ef4444 !important;
+}
+
+.option-btn.dimmed {
+  opacity: 0.4;
+  transform: scale(0.98);
+}
+
+
+.start-btn {
+  background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
+  color: white;
+  padding: 18px 50px;
+  border-radius: 18px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(100, 108, 255, 0.4);
+}
+
+/* =========================================
+   13. TRAINING.JSX
+   ========================================= */
+
+  .training-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  width: 100%;
+}
+.training-card {
+  background: white;
+  border-radius: 35px;
+  overflow: hidden;
+  max-width: 900px; 
+  width: 100%;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column; 
+  min-height: auto;
+  border: 1px solid #f0f0f0;
+}
+
+
+.training-image-container {
+  width: 100%;
+  height: 300px; 
+  overflow: hidden;
+}
+
+.training-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:transform 0.5s ease;
+}
+
+.training-content {
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+}
+
+.sentence-display {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 10px 0 25px 0;
+  line-height: 1.4;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.training-input {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid #f0f0f0;
+  border-radius: 18px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+  outline: none;
+  text-align: center;
+  font-weight: 600;
+}
+
+.training-input:focus {
+  border-color: #646cff;
+  box-shadow: 0 10px 25px rgba(100, 108, 255, 0.1);
+}
+
+.s-border { border-color: #00b894 !important; background: #f0fff4; }
+.e-border { border-color: #ff7675 !important; background: #fff5f5; }
+
+.check-btn {
+  background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
+  color: white;
+  padding: 18px 30px;
+  border-radius: 16px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(100, 108, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.check-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(100, 108, 255, 0.4);
+  filter: brightness(1.1);
+}
+
+.check-btn:active {
+  transform: translateY(-1px);
+}
+
+.next-btn {
+  background: #2d3436;
+  color: white;
+  padding: 18px 30px;
+  border-radius: 16px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+  background: #000;
+  transform: translateX(5px); 
+}
+
+.correct-answer {
+  color: #646cff;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+.category-badge {
+  position: static; 
+  background: #f0f1ff;
+  color: #646cff;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(100, 108, 255, 0.2);
+}
+
+/* Подсказка (значение) */
+.meaning-hint {
+  font-size: 1rem;
+  color: #636e72;
+  background: #f8faff;
+  padding: 15px 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  border-left: 5px solid #646cff;
+  display: inline-block;
+  text-align: left;
+}
+
+.msg-container {
+  margin-top: 15px;
+  animation: slideUp 0.3s ease;
+}
+
+/* Сообщения */
+.status-messages { margin-top: 20px; }
+.success-msg { color: #00b894; font-weight: 700; font-size: 1.1rem; }
+.error-msg { color: #ff7675; font-weight: 700; }
+
+.hint-box {
+  margin-top: 25px;
+  padding: 20px;
+  background: #fff5f5;
+  border-radius: 18px;
+  border: 2px dashed #ff7675;
+}
+
+.correct-answer-text span {
+  color: #646cff;
+  font-weight: 900;
+  font-size: 1.3rem;
+  display: block;
+  margin-top: 5px;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TASK BOX IN TRAINING SECTION */
+
+/* Верхняя панель (Категория + Счетчик) */
+.training-header {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 15px;              
+  padding: 25px 30px 20px;
+  background: #ffffff;
+}
+
+.idiom-counter {
+  background: #f8f9fa;
+  padding: 8px 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #eee;
+}
+
+.idiom-counter span {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.idiom-counter strong {
+  color: #646cff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.idiom-counter small {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+
+.idiom-counter:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Контейнер для полоски  */
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: #f0f0f0;
+  margin: 0; 
+  overflow: hidden;
+}
+
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #646cff 0%, #4a90e2 100%);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   15. СТИЛИ УРОВНЕЙ (LEVELING SYSTEM)
+   ========================================= */
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.level-badge {
+  padding: 6px 14px;
+  border-radius: 100px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Цвета для уровней  */
+.level-starter { background: #95a5a6; } /* Серый */
+.level-pro { background: linear-gradient(135deg, #e67e22, #d35400); } /* Оранжевый */
+.level-master { background: linear-gradient(135deg, #9b59b6, #8e44ad); } /* Фиолетовый */
+.level-legend { background: linear-gradient(135deg, #f1c40f, #f39c12); box-shadow: 0 0 15px rgba(241, 196, 15, 0.4); } /* Золотой */
+
+/* =========================================
+   16. ТАБЛИЦА ЛИДЕРОВ (LEADERBOARD)
+   ========================================= */
+.leaderboard-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.leaderboard-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, #2d3436 0%, #646cff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.leaderboard-list {
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+  border: 1px solid #f1f2f6;
+}
+
+.leader-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: white;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  transition: transform 0.2s ease;
+}
+
+.rank-gold { 
+  background: linear-gradient(90deg, #fff9e6 0%, #ffffff 100%);
+  border: 1px solid #ffd700;
+}
+.rank-gold .leader-rank { color: #ffab00; font-size: 1.5rem; }
+
+.rank-silver { border: 1px solid #c0c0c0; }
+.rank-bronze { border: 1px solid #cd7f32; }
+
+.current-user-highlight {
+  border: 2px solid #646cff;
+  box-shadow: 0 4px 15px rgba(100, 108, 255, 0.2);
+}
+
+.you-badge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: #646cff;
+  color: white;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.avatar-wrapper { position: relative; }
+
+.leader-item:last-child { border-bottom: none; }
+.leader-item:hover { background: #f8faff; }
+
+.leader-rank {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #b2bec3;
+  width: 40px;
+}
+
+/* Подсветка  */
+.leader-item:nth-child(1) .leader-rank { color: #f1c40f; font-size: 1.5rem; }
+.leader-item:nth-child(2) .leader-rank { color: #95a5a6; }
+.leader-item:nth-child(3) .leader-rank { color: #cd7f32; }
+
+.leader-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 20px;
+  border: 2px solid #f0f1ff;
+}
+
+.leader-name {
+  flex-grow: 1;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2d3436;
+}
+
+.leader-score {
+  font-weight: 800;
+  color: #646cff;
+  font-size: 1.2rem;
+  background: #f0f1ff;
+  padding: 5px 15px;
+  border-radius: 12px;
+}
+
+
+.promo-banner-card {
+  background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
+  border-radius: 20px;
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 10px 25px rgba(100, 108, 255, 0.2);
+  text-align: left;
+}
+
+.promo-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.promo-content p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.promo-banner-card .auth-btn.login {
+  background: white;
+  color: #646cff;
+  white-space: nowrap;
+  margin-left: 20px;
+  padding: 12px 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   16. Бургер меню
+   ========================================= */
+
+
+/* Иконка */
+.burger-icon {
+  display: none; 
+  flex-direction: column;
+  justify-content: space-around;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 2000;
+  margin-left: auto;
+}
+
+.burger-icon span {
+  width: 100%;
+  height: 3px;
+  background-color: #646cff;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Анимация крестика */
+.burger-icon.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger-icon.open span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+.burger-icon.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+
+
+
+/* =========================================
+   АДАПТИВНОСТЬ (768px)
+   ========================================= */
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
+  .navbar { padding: 10px 20px; }
+  .navbar-links { gap: 15px; }
+
+  /* Профиль: Главная карточка */
+  .profile-user-card {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 25px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 20px !important;
+  }
+
+  .profile-avatar-container { margin-right: 0 !important; }
+  .profile-main-avatar { width: 90px; height: 90px; }
+
+  .profile-info { width: 100% !important; }
+  
+  .profile-name-row {
+    flex-direction: column !important;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+
+  /* ФИКС ПОЧТЫ:*/
+  .profile-email-text {
+    font-size: clamp(0.9rem, 3.5vw, 1rem) !important;
+    color: #666;
+    word-break: break-all !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    margin: 0 0 20px 0 !important;
+    display: block !important;
+  }
+
+   .burger-icon {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 80px 30px;
+    gap: 20px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    z-index: 1500;
+    align-items: flex-start; 
+  }
+
+  .navbar-links.show {
+    right: 0;
+  }
+
+  .navbar-links li {
+    width: 100%;
+  }
+
+  .nav-user-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+  }
+
+  /* Затемнение фона */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1400;
+  }
+}
+
+.navbar-links.show li {
+  animation: slideInNav 0.4s ease forwards;
+  opacity: 0; 
+}
+
+
+@keyframes slideInNav {
+  from { 
+    transform: translateX(30px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+
+.navbar-links.show li:nth-child(1) { animation-delay: 0.1s; }
+.navbar-links.show li:nth-child(2) { animation-delay: 0.2s; }
+.navbar-links.show li:nth-child(3) { animation-delay: 0.3s; }
+.navbar-links.show li:nth-child(4) { animation-delay: 0.4s; }
+.navbar-links.show li:nth-child(5) { animation-delay: 0.3s; }
+.navbar-links.show li:nth-child(6) { animation-delay: 0.4s; }
+.navbar-links.show li:nth-child(7) { animation-delay: 0.4s; }
+
+  /* СТАТИСТИКА */
+  .profile-stats-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .stat-item {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: #f8f9fa !important;
+    padding: 12px 15px !important;
+    border-radius: 12px !important;
+    border: 1px solid #eee !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .stat-label {
+    font-size: 0.9rem !important;
+    flex: 1;
+    text-align: left !important;
+  }
+
+  .stat-value {
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+  }
+
+  /* Тренажеры */
+  .training-image-container, .random-image-wrapper { height: 200px; }
+  .sentence-display { font-size: 1.2rem; }
+
+
+
+/* МОБИЛЬНАЯ АДАПТИВНОСТЬ (480px) */
+@media (max-width: 480px) {
+  .profile-main-avatar { width: 75px; height: 75px; }
+  .profile-name { font-size: 1.4rem !important; }
+  
+  .idioms-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .stat-item { padding: 10px 12px !important; }
+  .stat-value { font-size: 1.1rem !important; }
+}
