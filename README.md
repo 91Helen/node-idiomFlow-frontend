@@ -91,6 +91,59 @@ Managed secure communication between **Netlify** (Static hosting) and **Render**
 
 ---
 
+## 🏗 Project Structure / Структура проекта
+```text
+idiom-flow/
+├── backend/                # Server-side (Node.js & Express)
+│   ├── config/
+│   │   └── db.js           # Database connection
+│   ├── controllers/        # Business logic
+│   │   ├── idiomController.js
+│   │   └── userController.js
+│   ├── middleware/         # Security & Auth
+│   │   └── auth.js
+│   ├── models/             # Database schemas
+│   │   ├── Idiom.js
+│   │   └── User.js
+│   ├── routes/             # API Endpoints
+│   │   ├── idiomRoutes.js
+│   │   └── userRoutes.js
+│   ├── .env                # Environment variables
+│   ├── index.js            # Server entry point
+│   └── package.json
+├── frontend/               # Client-side (React + Vite)
+│   ├── public/             # Static assets (favicon.png)
+│   ├── src/
+│   │   ├── app/            # Redux Store
+│   │   │   └── store.js
+│   │   ├── components/     # UI Components
+│   │   │   ├── AddIdiom.jsx
+│   │   │   ├── IdiomCard.jsx
+│   │   │   ├── IdiomsList.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   └── RandomIdiom.jsx
+│   │   ├── features/       # Data fetching (RTK Query)
+│   │   │   └── apiSlice.js
+│   │   ├── pages/          # Application Pages
+│   │   │   ├── Home.jsx
+│   │   │   ├── Leaderboard.jsx
+│   │   │   ├── Profile.jsx
+│   │   │   ├── Quiz.jsx
+│   │   │   └── Training.jsx
+│   │   ├── App.css
+│   │   ├── App.jsx         # Routing
+│   │   ├── index.css
+│   │   └── main.jsx        # App entry point
+│   ├── .env                # Client-side config
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html          # HTML Template
+│   ├── package.json
+│   └── vite.config.js      # Build configuration
+└── package-lock.json       # Root dependencies
+```
+---
+
 ## 👤 Author / Автор
-**[Filatova Elena / Филатова Елена]**
+**[With love - Elena Filatova ❤️ / Филатова Елена]**
 * LinkedIn: [www.linkedin.com/in/elena-filatova-15b879308]
