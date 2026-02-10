@@ -19,7 +19,16 @@
 
 ---
 
-## 🎮 Key Features / Основные возможности
+## Clone the repositories / Клонировать репозитории:
+   ```bash
+   # Frontend
+   git clone [https://github.com/91Helen/node-idiomFlow-frontend.git](https://github.com/91Helen/node-idiomFlow-frontend.git)
+   
+   # Backend
+   git clone [https://github.com/91Helen/node-idiomFlow-backend.git](https://github.com/91Helen/node-idiomFlow-backend.git)
+
+``````
+---
 
 ### 🇺🇸 English
 * **Memorization Tool**: A dedicated flashcard-style trainer. Users view an idiom, recall its meaning, and use visual associations for better retention.
