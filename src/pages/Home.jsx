@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useGetIdiomsQuery, useDeleteIdiomMutation } from "../features/apiSlice";
 import IdiomCard from "../components/IdiomCard";
-import Loader from "../components/Loader"; // 1. Импортируем наш новый лоадер
+import Loader from "../components/Loader"; 
 import "../App.css"; 
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
   const [token, setToken] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // 2. Передаем token прямо в хук. RTK Query сам сделает перезапрос, когда token изменится.
+ 
   const { data: idioms, isLoading, error } = useGetIdiomsQuery(token);
   const [deleteIdiom] = useDeleteIdiomMutation();
 
@@ -38,7 +38,7 @@ const Home = () => {
     if (window.confirm("Удалить эту идиому?")) {
       try {
         const t = await getAccessTokenSilently();
-        // Используем unwrap для перехвата ошибок мутации
+      
         await deleteIdiom({ id, token: t }).unwrap();
       } catch (err) {
         console.error("Ошибка удаления:", err);
@@ -46,7 +46,7 @@ const Home = () => {
     }
   };
 
-  // 3. Заменяем скучный текст на твой новый оригинальный лоадер
+
   if (isLoading) return <Loader />;
   
   if (error) return (
@@ -96,3 +96,4 @@ const Home = () => {
 };
 
 export default Home;
+
