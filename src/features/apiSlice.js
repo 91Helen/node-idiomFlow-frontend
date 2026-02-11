@@ -5,7 +5,7 @@ export const idiomsApi = createApi({
   baseQuery: fetchBaseQuery({ 
     baseUrl: `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api/` 
   }),
-  // Мы сохраняем Idioms и добавляем Leaderboard для разделения кеша
+
   tagTypes: ['Idioms', 'Leaderboard'], 
 
   endpoints: (builder) => ({
@@ -23,7 +23,7 @@ export const idiomsApi = createApi({
     }),
 
     // 2. ПОЛУЧЕНИЕ РЕЙТИНГА (Leaderboard)
-    // Добавил поддержку токена, чтобы бэкенд мог идентифицировать "тебя" в списке
+ 
     getLeaderboard: builder.query({
       query: (token) => ({
         url: 'users/leaderboard',
@@ -66,3 +66,4 @@ export const {
   useAddIdiomMutation, 
   useDeleteIdiomMutation 
 } = idiomsApi;
+
