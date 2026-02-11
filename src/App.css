@@ -1451,6 +1451,150 @@ h1, h2, h3, .navbar-brand a {
 .burger-icon.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
+/* =========================================
+   16. Loader
+   ========================================= */
+
+/* Контейнер на весь экран */
+.loader-container {
+  position: fixed; /* Фиксируем поверх всего */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999; /* Самый высокий приоритет */
+  background-color: #fcfcfc; /* Должен быть непрозрачным */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Контент внутри */
+.loader-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 80%;
+}
+
+/* Пульсирующая иконка мозга */
+.brain-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px rgba(118, 74, 188, 0.3));
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Стили для текста идиом */
+.loader-text {
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 0;
+  min-height: 1.6em; /* Чтобы текст не "прыгал" при смене строк */
+  letter-spacing: 0.5px;
+}
+
+/* Мигающий курсор как в консоли */
+.cursor {
+  display: inline-block;
+  width: 3px;
+  background-color: #764abc; /* Цвет твоего бренда (фиолетовый Redux) */
+  margin-left: 5px;
+  animation: blink 0.8s step-end infinite;
+}
+
+/* Контейнер прогресс-бара */
+.progress-bar {
+  width: 250px;
+  height: 6px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 25px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Бегущая полоса загрузки */
+.progress-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #61dafb, #764abc, #61dafb);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Анимации */
+
+/* Пульсация иконки */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Мигание курсора */
+@keyframes blink {
+  from, to { background-color: transparent; }
+  50% { background-color: #764abc; }
+}
+
+/* Движение градиента в прогресс-баре */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Плавное появление всего лоадера */
+.loader-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* =========================================
+   17. Анимация GSAP
+   ========================================= */
+/* Основная обертка приложения */
+.main-wrapper {
+  opacity: 0; 
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+.main-wrapper.is-loading {
+  display: none;
+}
+
+
+.main-wrapper.is-ready {
+  display: block;
+}
+
+/* Контейнер для роутов */
+.app-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Плавный вход для отдельных страниц внутри роутов */
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 
 
