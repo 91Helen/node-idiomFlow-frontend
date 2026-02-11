@@ -2,32 +2,43 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const idiomsApi = createApi({
   reducerPath: 'idiomsApi',
- 
   baseQuery: fetchBaseQuery({ 
-    baseUrl: `${import.meta.env.VITE_API_URL}/api/` 
+    baseUrl: `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api/` 
   }),
-  tagTypes: ['Idioms'], 
+  // Мы сохраняем Idioms и добавляем Leaderboard для разделения кеша
+  tagTypes: ['Idioms', 'Leaderboard'], 
 
   endpoints: (builder) => ({
-    
-    // 1.  (GET) 
+    // 1. Получение всех идиом (публичные + свои)
     getIdioms: builder.query({
       query: (token) => ({
         url: 'idioms',
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       }),
-      providesTags: ['Idioms'],
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Idioms', id: _id })), 'Idioms']
+          : ['Idioms'],
     }),
 
-    // 2.  (POST)
+    // 2. ПОЛУЧЕНИЕ РЕЙТИНГА (Leaderboard)
+    // Добавил поддержку токена, чтобы бэкенд мог идентифицировать "тебя" в списке
+    getLeaderboard: builder.query({
+      query: (token) => ({
+        url: 'users/leaderboard',
+        method: 'GET',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      }),
+      providesTags: ['Leaderboard'],
+    }),
+
+    // 3. Добавление новой идиомы
     addIdiom: builder.mutation({
       query: ({ body, token }) => ({
         url: 'idioms',
         method: 'POST',
-        body: body,
+        body,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +46,7 @@ export const idiomsApi = createApi({
       invalidatesTags: ['Idioms'],
     }),
 
-    // 3.  (DELETE)
+    // 4. Удаление идиомы
     deleteIdiom: builder.mutation({
       query: ({ id, token }) => ({
         url: `idioms/${id}`,
@@ -46,12 +57,12 @@ export const idiomsApi = createApi({
       }),
       invalidatesTags: ['Idioms'],
     }),
-
   }),
 });
 
 export const { 
   useGetIdiomsQuery, 
+  useGetLeaderboardQuery, 
   useAddIdiomMutation, 
   useDeleteIdiomMutation 
 } = idiomsApi;
