@@ -4,7 +4,7 @@ import { withAuthenticationRequired } from '@auth0/auth0-react';
 import { Toaster } from 'react-hot-toast';
 import { gsap } from 'gsap';
 
-// Хуки и компоненты
+
 import { useGetIdiomsQuery } from './features/apiSlice'; 
 import Navbar from './components/Navbar';
 import AddIdiom from './components/AddIdiom';
@@ -29,13 +29,12 @@ const ProtectedProfile = withAuthenticationRequired(Profile, {
 function App() {
   const { data: idioms = [], isLoading } = useGetIdiomsQuery();
   
-  // Состояние для отслеживания финала анимации (чтобы убрать Loader из DOM)
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const contentRef = useRef(null);
 
   useEffect(() => {
     if (!isLoading) {
-      // Когда данные загружены, запускаем GSAP
+     
       const tl = gsap.timeline({
         onComplete: () => setIsAnimationFinished(true)
       });
@@ -49,7 +48,7 @@ function App() {
 
   return (
     <Router>
-      {/* Показываем лоадер, пока данные грузятся ИЛИ пока идет анимация появления */}
+   
       {(!isAnimationFinished || isLoading) && <Loader />}
 
       <div 
