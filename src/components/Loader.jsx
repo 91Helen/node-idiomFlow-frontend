@@ -1,39 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import './Loader.css';
 
-
-const idioms = ["Piece of cake...", "Break a leg...", "In a nutshell...", "Keep it up...", "Flowing data..."];
+const loadingIdioms = [
+  { eng: "Bite the bullet", rus: "Сжать зубы / Терпеть трудности" },
+  { eng: "Break a leg", rus: "Ни пуха, ни пера!" },
+  { eng: "Piece of cake", rus: "Проще простого" },
+  { eng: "Under the weather", rus: "Плохо себя чувствовать" },
+  { eng: "Smooth as silk", rus: "Гладко, как по маслу" },
+  { eng: "Patience is a virtue", rus: "Терпение — это добродетель" },
+  { eng: "The best of both worlds", rus: "Лучшее из обоих миров" }
+];
 
 const Loader = () => {
-  const [text, setText] = useState(""); // Теперь будет использоваться!
-  const [idiomIndex, setIdiomIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // Логика печати букв
-    if (charIndex < idioms[idiomIndex].length) {
-      const timeout = setTimeout(() => {
-        setText((prev) => prev + idioms[idiomIndex][charIndex]);
-        setCharIndex((prev) => prev + 1);
-      }, 100); // Скорость печати одной буквы
-      return () => clearTimeout(timeout);
-    } else {
-      // Пауза перед следующей идиомой
-      const timeout = setTimeout(() => {
-        setText("");
-        setCharIndex(0);
-        setIdiomIndex((prev) => (prev + 1) % idioms.length);
-      }, 2000); // Сколько времени висит готовая фраза
-      return () => clearTimeout(timeout);
-    }
-  }, [charIndex, idiomIndex]);
+  
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === loadingIdioms.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="loader-container">
       <div className="loader-content">
         <div className="brain-icon">🧠</div>
-        {/* Используем нашу переменную text здесь */}
-        <p className="loader-text">{text}<span className="cursor">|</span></p>
+        
+        <div className="loader-text-wrapper">
+          <h2 className="loader-eng">{loadingIdioms[currentIndex].eng}</h2>
+          <p className="loader-rus">{loadingIdioms[currentIndex].rus}</p>
+          <span className="cursor">|</span>
+        </div>
+
         <div className="progress-bar">
           <div className="progress-fill"></div>
         </div>
