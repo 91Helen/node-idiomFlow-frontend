@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Loader.css';
+import '../App.css';
 
 const loadingIdioms = [
   { eng: "Bite the bullet", rus: "Сжать зубы / Терпеть трудности" },
@@ -15,7 +15,7 @@ const Loader = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-  
+    
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex === loadingIdioms.length - 1 ? 0 : prevIndex + 1
