@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
-import axios from 'axios';
-import { Toaster } from 'react-hot-toast'; // 1. Импортируем Toaster
+import { Toaster } from 'react-hot-toast';
+import { gsap } from 'gsap';
 
-// Твои компоненты
+// Хуки и компоненты
+import { useGetIdiomsQuery } from './features/apiSlice'; 
 import Navbar from './components/Navbar';
 import AddIdiom from './components/AddIdiom';
 import RandomIdiom from './components/RandomIdiom';
@@ -13,62 +14,63 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Quiz from './pages/Quiz';
 import Leaderboard from './pages/Leaderboard';
+import Loader from './components/Loader'; 
 
 import './App.css';
 
 const ProtectedAddIdiom = withAuthenticationRequired(AddIdiom, {
-  onRedirecting: () => <div className="loader">Загрузка...</div>,
+  onRedirecting: () => <Loader />,
 });
 
 const ProtectedProfile = withAuthenticationRequired(Profile, {
-  onRedirecting: () => <div className="loader">Загрузка...</div>,
+  onRedirecting: () => <Loader />,
 });
 
 function App() {
-  const [idioms, setIdioms] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const isFetched = useRef(false);
+  const { data: idioms = [], isLoading } = useGetIdiomsQuery();
+  
+  // Состояние для отслеживания финала анимации (чтобы убрать Loader из DOM)
+  const [isAnimationFinished, setIsAnimationFinished] = useState(false);
+  const contentRef = useRef(null);
 
   useEffect(() => {
-    if (isFetched.current) return;
-    const fetchIdioms = async () => {
-      try {
-        const res = await axios.get('http://localhost:5000/api/idioms');
-        setIdioms(res.data);
-        isFetched.current = true;
-      } catch (err) {
-        console.error("Ошибка:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchIdioms();
-  }, []);
+    if (!isLoading) {
+      // Когда данные загружены, запускаем GSAP
+      const tl = gsap.timeline({
+        onComplete: () => setIsAnimationFinished(true)
+      });
+
+      tl.fromTo(contentRef.current, 
+        { opacity: 0, y: 15 }, 
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.3 }
+      );
+    }
+  }, [isLoading]);
 
   return (
     <Router>
-      <Navbar />
-      {/* 2. Добавляем компонент уведомлений с настройками */}
-      <Toaster 
-        position="top-center" 
-        reverseOrder={false} 
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-            borderRadius: '12px',
-          },
-        }}
-      />
-      
-      <div className="app-container">
-        {loading ? (
-          <div className="loader-wrapper">
-            <div className="loader"></div>
-            <p>Загружаем знания...</p>
-          </div>
-        ) : (
+      {/* Показываем лоадер, пока данные грузятся ИЛИ пока идет анимация появления */}
+      {(!isAnimationFinished || isLoading) && <Loader />}
+
+      <div 
+        ref={contentRef} 
+        className={`main-wrapper ${isLoading ? 'is-loading' : 'is-ready'}`}
+      >
+        <Navbar />
+        
+        <Toaster 
+          position="top-center" 
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+              borderRadius: '12px',
+            },
+          }}
+        />
+
+        <div className="app-container">
           <Routes>
             <Route path="/" element={<Home idioms={idioms} />} />
             <Route path="/random" element={<RandomIdiom idioms={idioms} />} />
@@ -79,7 +81,7 @@ function App() {
               path="/add" 
               element={
                 <div className="fade-in">
-                  <ProtectedAddIdiom setIdioms={setIdioms} />
+                  <ProtectedAddIdiom /> 
                 </div>
               } 
             />
@@ -91,7 +93,7 @@ function App() {
               element={<ProtectedProfile idioms={idioms} />} 
             />
           </Routes>
-        )}
+        </div>
       </div>
     </Router>
   );
