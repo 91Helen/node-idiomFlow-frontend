@@ -282,7 +282,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   5. ТРЕНАЖЕР (RANDOM IDIOM) — ВЕРНУЛИ КРАСОТУ
+   5. ТРЕНАЖЕР (RANDOM IDIOM) 
    ========================================= */
 .random-page-wrapper {
   max-width: 600px;
@@ -380,7 +380,7 @@ h1, h2, h3, .navbar-brand a {
   letter-spacing: 0.5px;
 }
 /* =========================================
-   6. СТАРТОВЫЙ ЭКРАН ТРЕНАЖЕРА (UPGRADED)
+   6. СТАРТОВЫЙ ЭКРАН ТРЕНАЖЕРА
    ========================================= */
 .start-screen {
   background: white;
@@ -604,7 +604,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   10. ЛИЧНЫЙ КАБИНЕТ (PROFILE PAGE)
+   10. ЛИЧНЫЙ КАБИНЕТ 
    ========================================= */
 
 .profile-page-wrapper {
@@ -844,7 +844,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   12. КВИЗ (СИНХРОНИЗИРОВАНО С JSX)
+   12. КВИЗ 
    ========================================= */
 
 .quiz-container {
@@ -984,7 +984,6 @@ h1, h2, h3, .navbar-brand a {
   opacity: 0.4;
   transform: scale(0.98);
 }
-
 
 .start-btn {
   background: linear-gradient(135deg, #646cff 0%, #4a90e2 100%);
@@ -1276,10 +1275,10 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* Цвета для уровней  */
-.level-starter { background: #95a5a6; } /* Серый */
-.level-pro { background: linear-gradient(135deg, #e67e22, #d35400); } /* Оранжевый */
-.level-master { background: linear-gradient(135deg, #9b59b6, #8e44ad); } /* Фиолетовый */
-.level-legend { background: linear-gradient(135deg, #f1c40f, #f39c12); box-shadow: 0 0 15px rgba(241, 196, 15, 0.4); } /* Золотой */
+.level-starter { background: #95a5a6; } 
+.level-pro { background: linear-gradient(135deg, #e67e22, #d35400); } 
+.level-master { background: linear-gradient(135deg, #9b59b6, #8e44ad); } 
+.level-legend { background: linear-gradient(135deg, #f1c40f, #f39c12); box-shadow: 0 0 15px rgba(241, 196, 15, 0.4); } 
 
 /* =========================================
    16. ТАБЛИЦА ЛИДЕРОВ (LEADERBOARD)
@@ -1455,36 +1454,34 @@ h1, h2, h3, .navbar-brand a {
    16. Loader
    ========================================= */
 
-
+/* Контейнер на весь экран */
 .loader-container {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999; 
-  background-color: #fcfcfc; 
+  z-index: 9999;
+  background-color: #fcfcfc;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: fadeInEffect 0.5s ease-out;
 }
-
 
 .loader-content {
   text-align: center;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 80%;
 }
 
-
 .brain-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 10px rgba(118, 74, 188, 0.3));
-  animation: pulse 1.5s ease-in-out infinite;
+  font-size: 4.5rem;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 15px rgba(118, 74, 188, 0.2));
+  animation: pulseBrain 1.5s ease-in-out infinite;
 }
 
 /* Стили для текста идиом */
@@ -1494,11 +1491,11 @@ h1, h2, h3, .navbar-brand a {
   font-weight: 600;
   color: #333;
   margin: 10px 0;
-  min-height: 1.6em;
+  min-height: 1.6em; 
   letter-spacing: 0.5px;
 }
 
-/* Мигающий курсор как в консоли */
+/* Мигающий курсор  */
 .cursor {
   display: inline-block;
   width: 3px;
@@ -1507,24 +1504,26 @@ h1, h2, h3, .navbar-brand a {
   animation: blink 0.8s step-end infinite;
 }
 
-/* Контейнер прогресс-бара */
 .progress-bar {
-  width: 250px;
-  height: 6px;
-  background-color: #e0e0e0;
+  width: 280px;
+  height: 4px;
+  background-color: #eee;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 25px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  margin-top: 40px;
 }
 
+.loader-rus.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .progress-fill {
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #61dafb, #764abc, #61dafb);
+  background: linear-gradient(90deg, #764abc, #61dafb, #764abc);
   background-size: 200% 100%;
-  animation: shimmer 2s linear infinite;
+  animation: shimmerEffect 2s linear infinite;
 }
 
 /* Анимации */
@@ -1536,44 +1535,91 @@ h1, h2, h3, .navbar-brand a {
   100% { transform: scale(1); }
 }
 
-/* Мигание курсора */
-@keyframes blink {
-  from, to { background-color: transparent; }
-  50% { background-color: #764abc; }
-}
-
-/* Движение градиента в прогресс-баре */
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* Плавное появление всего лоадера */
 .loader-container {
   animation: fadeIn 0.5s ease-out;
 }
 
-@keyframes fadeIn {
+.loader-text-wrapper {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-eng {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #764abc; 
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.loader-rus {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 15px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 5px;
+  color: #764abc;
+  animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes slideFade {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes blinkCursor {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulseBrain {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes shimmerEffect {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes fadeInEffect {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-
 /* =========================================
    17. Анимация GSAP
    ========================================= */
-/* Основная обертка приложения */
+
 .main-wrapper {
   opacity: 0; 
   width: 100%;
   min-height: 100vh;
 }
 
-
 .main-wrapper.is-loading {
   display: none;
 }
-
 
 .main-wrapper.is-ready {
   display: block;
@@ -1708,7 +1754,6 @@ h1, h2, h3, .navbar-brand a {
   }
 }
 
-
 .navbar-links.show li:nth-child(1) { animation-delay: 0.1s; }
 .navbar-links.show li:nth-child(2) { animation-delay: 0.2s; }
 .navbar-links.show li:nth-child(3) { animation-delay: 0.3s; }
@@ -1753,7 +1798,6 @@ h1, h2, h3, .navbar-brand a {
   /* Тренажеры */
   .training-image-container, .random-image-wrapper { height: 200px; }
   .sentence-display { font-size: 1.2rem; }
-
 
 
 /* МОБИЛЬНАЯ АДАПТИВНОСТЬ (480px) */
