@@ -7,23 +7,41 @@ const loadingIdioms = [
   { eng: "Piece of cake", rus: "Проще простого" },
   { eng: "Under the weather", rus: "Плохо себя чувствовать" },
   { eng: "Smooth as silk", rus: "Гладко, как по маслу" },
-  { eng: "Patience is a virtue", rus: "Терпение — это добродетель" },
-  { eng: "The best of both worlds", rus: "Лучшее из обоих миров" }
+  { eng: "Patience is a virtue", rus: "Терпение — это добродетель" }
 ];
 
 const Loader = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    const currentFullText = loadingIdioms[index].eng;
     
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === loadingIdioms.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3500);
+ 
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+   
+        setDisplayText(currentFullText.slice(0, displayText.length + 1));
+        
+  
+        if (displayText === currentFullText) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+      
+        setDisplayText(currentFullText.slice(0, displayText.length - 1));
+        
+    
+        if (displayText === '') {
+          setIsDeleting(false);
+          setIndex((prev) => (prev + 1) % loadingIdioms.length);
+        }
+      }
+    }, isDeleting ? 40 : 100);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, index]);
 
   return (
     <div className="loader-container">
@@ -31,9 +49,14 @@ const Loader = () => {
         <div className="brain-icon">🧠</div>
         
         <div className="loader-text-wrapper">
-          <h2 className="loader-eng">{loadingIdioms[currentIndex].eng}</h2>
-          <p className="loader-rus">{loadingIdioms[currentIndex].rus}</p>
-          <span className="cursor">|</span>
+          <h2 className="loader-eng">
+            {displayText}
+            <span className="cursor">|</span>
+          </h2>
+   
+          <p className={`loader-rus ${displayText.length > 3 ? 'visible' : ''}`}>
+            {loadingIdioms[index].rus}
+          </p>
         </div>
 
         <div className="progress-bar">
