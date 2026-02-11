@@ -3,6 +3,7 @@
 [![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://learning-idioms-node.netlify.app/)
 [![React](https://img.shields.io/badge/Frontend-React-61DAFB)](https://reactjs.org/)
 [![Redux](https://img.shields.io/badge/State-Redux_Toolkit-764ABC)](https://redux-toolkit.js.org/)
+[![GSAP](https://img.shields.io/badge/Animation-GSAP-green)](https://greensock.com/gsap/)
 [![Node.js](https://img.shields.io/badge/Backend-Node.js-339933)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248)](https://www.mongodb.com/)
 [![Auth0](https://img.shields.io/badge/Security-Auth0-EB5424)](https://auth0.com/)
@@ -48,7 +49,7 @@
 
 ## 🛠 Tech Stack / Стек технологий
 
-* **Frontend**: React (Vite), **Redux Toolkit (RTK Query)**, React Router.
+* **Frontend**: React (Vite), **Redux Toolkit (RTK Query)**, **GSAP (GreenSock Animation Platform)**, React Router.
 * **Backend**: Node.js, Express, Mongoose.
 * **Database**: MongoDB Atlas.
 * **Authentication**: Auth0 (Secure JWT-based sessions).
@@ -68,6 +69,9 @@ Developed server-side logic for the **Leaderboard** and **User Progress**, invol
 ### 3. Cross-Platform Integration
 Managed secure communication between **Netlify** (Static hosting) and **Render** (Web Service). Solved **CORS** challenges and optimized **SPA routing** for a seamless production environment.
 
+### 4. Integrated the **GSAP** library to create a seamless UX. 
+Implemented complex transition logic where a `gsap.timeline` coordinates the smooth disappearance of the custom loader and the staggered appearance of the main content, eliminating visual artifacts during API data loading.
+
 ---
 ## 🧠 Технические решения и ключевые задачи
 
@@ -79,6 +83,9 @@ Managed secure communication between **Netlify** (Static hosting) and **Render**
 
 ### 3. Безопасность и кросс-платформенная интеграция
 Обеспечено стабильное взаимодействие фронтенда на **Netlify** и бэкенда на **Render**. Решены задачи кросс-доменных запросов (**CORS**) и настроена корректная маршрутизация для **SPA**, что исключает ошибки 404 при обновлении страниц и обеспечивает бесшовную работу приложения в облачной среде.
+
+### 4. High-Performance Animations (GSAP)
+Для создания бесшовного UX интегрирована библиотека **GSAP**. Реализована сложная логика перехода: плавное исчезновение кастомного лоадера и появление основного контента через `gsap.timeline`, что исключает визуальные скачки при загрузке данных из API.
 
 ---
 
