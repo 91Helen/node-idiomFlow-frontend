@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import IdiomCard from "../components/IdiomCard";
 import { toast } from "react-hot-toast";
+import "../App.css";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading: authLoading, getAccessTokenSilently } = useAuth0();
@@ -48,7 +49,6 @@ const Profile = () => {
   const myIdioms = idioms?.filter(idiom => idiom.userId === user?.sub);
   const levelInfo = getLevelInfo(dbUser?.totalPoints || 0);
 
-
   const handleDelete = (id) => {
     toast((t) => (
       <div className="toast-confirm-container">
@@ -58,14 +58,12 @@ const Profile = () => {
             className="toast-btn toast-btn-delete"
             onClick={async () => {
               toast.dismiss(t.id);
-              toast.promise(
-                deleteIdiom({ id, token }).unwrap(),
-                {
-                  loading: 'Удаляем...',
-                  success: <b>Удалено успешно!</b>,
-                  error: <b>Не удалось удалить 😕</b>,
-                }
-              );
+              try {
+                await deleteIdiom({ id, token }).unwrap();
+              
+              } catch (err) {
+                console.error("Ошибка удаления:", err);
+              }
             }}
           >
             Да
@@ -81,7 +79,7 @@ const Profile = () => {
     ), {
       duration: 5000,
       position: 'bottom-center',
-      className: 'custom-toast-wrapper',
+      id: 'confirm-delete-profile', 
     });
   };
 
