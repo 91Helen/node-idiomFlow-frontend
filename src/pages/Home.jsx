@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useGetIdiomsQuery, useDeleteIdiomMutation } from "../features/apiSlice";
 import IdiomCard from "../components/IdiomCard";
 import Loader from "../components/Loader"; 
+import { toast } from "react-hot-toast"; 
 import "../App.css"; 
 
 const Home = () => {
@@ -10,7 +11,6 @@ const Home = () => {
   const [token, setToken] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
- 
   const { data: idioms, isLoading, error } = useGetIdiomsQuery(token);
   const [deleteIdiom] = useDeleteIdiomMutation();
 
@@ -28,24 +28,48 @@ const Home = () => {
     getToken();
   }, [isAuthenticated, getAccessTokenSilently]);
 
-  // Фильтрация идиом по поиску
   const filteredIdioms = idioms?.filter(idiom => 
     idiom.phrase.toLowerCase().includes(searchTerm.toLowerCase()) ||
     idiom.meaning.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Удалить эту идиому?")) {
-      try {
-        const t = await getAccessTokenSilently();
-      
-        await deleteIdiom({ id, token: t }).unwrap();
-      } catch (err) {
-        console.error("Ошибка удаления:", err);
-      }
-    }
-  };
 
+  const handleDelete = (id) => {
+    toast((t) => (
+      <div className="toast-confirm-container">
+        <p className="toast-confirm-text">Удалить эту идиому? 🗑️</p>
+        <div className="toast-confirm-actions">
+          <button
+            className="toast-btn toast-btn-delete"
+            onClick={async () => {
+              toast.dismiss(t.id);
+              const accessToken = await getAccessTokenSilently(); 
+              toast.promise(
+                deleteIdiom({ id, token: accessToken }).unwrap(),
+                {
+                  loading: 'Удаляем...',
+                  success: <b>Удалено успешно!</b>,
+                  error: <b>Ошибка удаления 😕</b>,
+                }
+              );
+            }}
+          >
+            Да
+          </button>
+          <button
+            className="toast-btn toast-btn-cancel"
+            onClick={() => toast.dismiss(t.id)}
+          >
+            Нет
+          </button>
+        </div>
+      </div>
+    ), {
+      duration: 5000,
+      position: 'bottom-center',
+      className: 'custom-toast-wrapper',
+    });
+  };
 
   if (isLoading) return <Loader />;
   
@@ -96,4 +120,3 @@ const Home = () => {
 };
 
 export default Home;
-
