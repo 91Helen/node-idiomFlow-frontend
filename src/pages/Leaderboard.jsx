@@ -1,29 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useGetLeaderboardQuery } from '../features/apiSlice'; 
+import Loader from '../components/Loader';
 
 const Leaderboard = () => {
-  const { isAuthenticated, loginWithRedirect, user } = useAuth0(); 
-  const [leaders, setLeaders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const isInitialFetched = useRef(false); 
+  const { isAuthenticated, loginWithRedirect, user: auth0User } = useAuth0(); 
+  
 
-  useEffect(() => {
-   
-    const fetchLeaders = async () => {
-      try {
-        const res = await axios.get('http://localhost:5000/api/users/leaderboard');
-        setLeaders(res.data);
-        isInitialFetched.current = true;
-      } catch (err) {
-        console.error("Ошибка при загрузке рейтинга:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLeaders();
-  }, []);
+  const { data: leaders = [], isLoading, isError } = useGetLeaderboardQuery();
 
   const getRankClass = (index) => {
     if (index === 0) return 'rank-gold';
@@ -32,10 +16,12 @@ const Leaderboard = () => {
     return '';
   };
 
-  if (loading) return (
-    <div className="loader-container">
-      <div className="loader"></div>
-      <p>Считаем достижения...</p>
+  
+  if (isLoading) return <Loader />;
+
+  if (isError) return (
+    <div className="error-container">
+      <p>Не удалось загрузить таблицу лидеров. Попробуйте позже.</p>
     </div>
   );
 
@@ -61,8 +47,8 @@ const Leaderboard = () => {
       <div className="leaderboard-list">
         {leaders.length > 0 ? (
           leaders.map((leader, index) => {
-           
-            const isCurrentUser = isAuthenticated && user?.email === leader.email;
+         
+            const isCurrentUser = isAuthenticated && (auth0User?.sub === leader.userId || auth0User?.email === leader.email);
             
             return (
               <div 
@@ -71,12 +57,15 @@ const Leaderboard = () => {
                 style={{ animationDelay: `${index * 0.05}s` }} 
               >
                 <div className="leader-rank">
-                  {index < 3 ? <span className="medal-icon"></span> : index + 1}
+                  {index === 0 && "🥇"}
+                  {index === 1 && "🥈"}
+                  {index === 2 && "🥉"}
+                  {index > 2 && index + 1}
                 </div>
                 
                 <div className="avatar-wrapper">
                   <img 
-                    src={leader.picture || 'https://via.placeholder.com/50'} 
+                    src={leader.picture || 'https://placehold.co/50'} 
                     alt={leader.name} 
                     className="leader-avatar" 
                   />
