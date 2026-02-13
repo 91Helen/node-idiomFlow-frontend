@@ -1,5 +1,5 @@
-
-import React, { useState} from 'react'; 
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'; 
 import { NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'; 
@@ -14,7 +14,8 @@ const Navbar = () => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
-    if (isMenuOpen && Math.abs(latest - previous) > 5) { 
+ 
+    if (isMenuOpen && Math.abs(latest - previous) > 10) { 
       setIsMenuOpen(false); 
     }
 
@@ -23,6 +24,7 @@ const Navbar = () => {
       return; 
     }
 
+   
     if (latest > previous && latest > 150) {
       setIsHidden(true);
     } else if (latest < previous) {
@@ -32,10 +34,8 @@ const Navbar = () => {
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  const MotionNav = motion.nav;
-
   return (
-    <MotionNav 
+    <motion.nav 
       className="navbar"
       initial={{ y: 0 }}
       variants={{
@@ -51,7 +51,10 @@ const Navbar = () => {
       
       <div 
         className={`burger-icon ${isMenuOpen ? 'open' : ''}`} 
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={(e) => {
+          e.stopPropagation(); 
+          setIsMenuOpen(!isMenuOpen);
+        }}
       >
         <span></span><span></span><span></span>
       </div>
@@ -63,7 +66,7 @@ const Navbar = () => {
         
         {isAuthenticated && (
           <li>
-            <NavLink to="/add" onClick={closeMenu} style={{ color: '#646cff', fontWeight: 'bold' }}>
+            <NavLink to="/add" onClick={closeMenu} className="add-idiom-link">
               Добавить идиому +
             </NavLink>
           </li>
@@ -101,7 +104,7 @@ const Navbar = () => {
           </li>
         )}
       </ul>
-    </MotionNav>
+    </motion.nav>
   );
 };
 
