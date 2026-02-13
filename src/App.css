@@ -7,6 +7,12 @@
   padding: 0;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: #fcfcfd;
@@ -30,48 +36,91 @@ h1, h2, h3, .navbar-brand a {
    2. НАВИГАЦИЯ (NAVBAR)
    ========================================= */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: white;
-  border-bottom: 1px solid #f0f0f0;
-  position: sticky;
+  position: fixed !important;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #fcfcfd; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  z-index: 10000;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f1f2f6;
+  box-shadow: none; 
+  transition: none !important;
+  will-change: auto;
 }
 
 .navbar-brand a {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #646cff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800; 
   text-decoration: none;
+  color: #636e72; 
+  letter-spacing: -0.03em; 
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .navbar-links {
   display: flex;
-  gap: 25px;
-  list-style: none;
   align-items: center;
+  list-style: none;
+  gap: 25px;
 }
 
 .navbar-links a {
+  font-family: 'Inter', sans-serif;
   text-decoration: none;
-  color: #636e72;
-  font-weight: 600;
-  transition: color 0.3s;
+  color: #636e72 !important;
+  font-weight: 600; 
+  transition: color 0.2s;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased;
 }
 
-.navbar-links a:hover, .navbar-links a.active {
-  color: #646cff;
+.navbar-links a:hover, 
+.navbar-links a.active {
+  color: #646cff !important;
 }
-
 .nav-avatar {
   width: 35px;
   height: 35px;
   border-radius: 50%;
   border: 2px solid #646cff;
+}
+.burger-icon, .nav-overlay {
+  display: none;
+}
+
+.main-wrapper {
+  padding-top: 70px; 
+}
+
+.nav-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #2d3436;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.nav-profile-link:hover {
+  background: #f1f2f6;
+}
+
+.nav-username {
+  font-size: 0.9rem;
 }
 
 /* =========================================
@@ -97,7 +146,6 @@ h1, h2, h3, .navbar-brand a {
   font-weight: 500;
 }
 
-/* Поиск  */
 .search-box {
   max-width: 100%;
   margin: 0 auto 50px;
@@ -128,13 +176,13 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   4. СЕТКА И КАРТОЧКИ (PREMIUM STYLE)
+   4. СЕТКА И КАРТОЧКИ (ГЛАВНАЯ + ПРОФИЛЬ)
    ========================================= */
 .idioms-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 30px;
-  padding-bottom: 50px;
+  padding: 20px 0 50px;
 }
 
 .idiom-card {
@@ -145,7 +193,9 @@ h1, h2, h3, .navbar-brand a {
   display: flex;
   flex-direction: column;
   height: 520px; 
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease, 
+              border-color 0.4s ease;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
 }
 
@@ -159,93 +209,13 @@ h1, h2, h3, .navbar-brand a {
   width: 100%;
   height: 220px;
   overflow: hidden;
-  position: relative;
-}
-
-/* Эффект зума при наведении на всю карточку */
-.idiom-card:hover .idiom-img {
-  transform: scale(1.1);
-}
-
-.idiom-main-content {
-  padding: 25px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.idiom-phrase {
-  font-size: 1.5rem;
-  font-weight: 850;
-  color: #1a1a1a;
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
-
-.idiom-meaning {
-  color: #57606f;
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-.idiom-example {
-  margin-top: auto;
-  padding: 15px;
-  background: #f8faff;
-  border-left: 5px solid #646cff;
-  border-radius: 8px;
-  font-style: italic;
-  color: #2d3436;
-  font-size: 0.95rem;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.idiom-footer {
-  padding: 15px 25px;
-  background: #ffffff;
-  border-top: 1px solid #f8f9fa;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* =========================================
-   4. СЕТКА И КАРТОЧКИ (ГЛАВНАЯ + ПРОФИЛЬ)
-   ========================================= */
-.idioms-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-}
-
-.idiom-card {
-  background: white;
-  border-radius: 24px;
-  border: 1px solid #f0f0f0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 480px;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-}
-
-.idiom-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(100, 108, 255, 0.12);
-  border-color: #646cff55;
-}
-
-.idiom-image-wrapper {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
 }
 
 .idiom-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .idiom-card:hover .idiom-img {
@@ -282,7 +252,75 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   5. ТРЕНАЖЕР (RANDOM IDIOM) 
+  5.  TOASTER
+   ========================================= */
+.custom-toast-wrapper {
+  background: #2c2c2c !important;
+  color: #fff !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  border: 1px solid #444 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+
+.toast-confirm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.toast-confirm-text {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.toast-confirm-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Общие стили кнопок в тосте */
+.toast-btn {
+  flex: 1;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.toast-btn-delete {
+  background-color: #ff4b4b;
+  color: white;
+}
+
+.toast-btn-delete:hover {
+  background-color: #ff3333;
+  transform: translateY(-1px);
+}
+
+.toast-btn-cancel {
+  background-color: #4a4a4a;
+  color: white;
+}
+
+.toast-btn-cancel:hover {
+  background-color: #5a5a5a;
+}
+
+.toast-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   6. ТРЕНАЖЕР (RANDOM IDIOM) 
    ========================================= */
 .random-page-wrapper {
   max-width: 600px;
@@ -304,7 +342,6 @@ h1, h2, h3, .navbar-brand a {
   transition: all 0.3s ease;
 }
 
-/* Обвертка для картинки с легким свечением */
 .random-image-wrapper {
   width: 100%;
   height: 320px; 
@@ -334,7 +371,6 @@ h1, h2, h3, .navbar-brand a {
   line-height: 1.2;
 }
 
-/* Стилизация перевода */
 .meaning-section {
   text-align: left;
   background: #f8faff;
@@ -380,7 +416,7 @@ h1, h2, h3, .navbar-brand a {
   letter-spacing: 0.5px;
 }
 /* =========================================
-   6. СТАРТОВЫЙ ЭКРАН ТРЕНАЖЕРА
+   7. СТАРТОВЫЙ ЭКРАН ТРЕНАЖЕРА
    ========================================= */
 .start-screen {
   background: white;
@@ -456,7 +492,6 @@ h1, h2, h3, .navbar-brand a {
   transform: scale(0.95);
 }
 
-/* эмодзи в заголовке */
 .trainer-title {
   font-size: 2.5rem;
   font-weight: 900;
@@ -466,7 +501,7 @@ h1, h2, h3, .navbar-brand a {
   margin-bottom: 35px;
 }
 /* =========================================
-   7. ПРОМО-КАРТОЧКА (PAYWALL) & СТАРТ
+   8. ПРОМО-КАРТОЧКА (PAYWALL) & СТАРТ
    ========================================= */
 .promo-card {
   background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%) !important;
@@ -501,7 +536,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   7. КНОПКИ И ОБЩИЕ КЛАССЫ
+   9. КНОПКИ И ОБЩИЕ КЛАССЫ  ADDIDIOM
    ========================================= */
 .add-idiom-button {
   background: #646cff;
@@ -533,18 +568,16 @@ h1, h2, h3, .navbar-brand a {
   background: #ff4d4f;
   color: white;
 }
-/* =========================================
-   9. СТИЛИ ДЛЯ ВХОДА / ВЫХОДА (AUTH0)
-   ========================================= */
 
-/* Контейнер для кнопок в набаре */
+/* =========================================
+   10. СТИЛИ ДЛЯ ВХОДА / ВЫХОДА (AUTH0)
+   ========================================= */
 .nav-user-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Общий стиль для кнопок авторизации */
 .auth-btn {
   padding: 10px 20px;
   border-radius: 10px;
@@ -581,30 +614,8 @@ h1, h2, h3, .navbar-brand a {
   color: #ff4d4f;
   border-color: #ff4d4f;
 }
-
-/* Ссылка на профиль в навбаре */
-.nav-profile-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: #2d3436;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 12px;
-  transition: background 0.2s;
-}
-
-.nav-profile-link:hover {
-  background: #f1f2f6;
-}
-
-.nav-username {
-  font-size: 0.9rem;
-}
-
 /* =========================================
-   10. ЛИЧНЫЙ КАБИНЕТ 
+   11. ЛИЧНЫЙ КАБИНЕТ 
    ========================================= */
 
 .profile-page-wrapper {
@@ -614,7 +625,6 @@ h1, h2, h3, .navbar-brand a {
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Карточка пользователя с эффектом глубины */
 .profile-user-card {
   background: white;
   border-radius: 30px;
@@ -629,7 +639,6 @@ h1, h2, h3, .navbar-brand a {
   overflow: hidden;
 }
 
-/* Декоративный акцент на фоне профиля */
 .profile-user-card::after {
   content: '';
   position: absolute;
@@ -674,7 +683,9 @@ h1, h2, h3, .navbar-brand a {
   display: block;
 }
 
-/* Статистика  */
+/* =========================================
+   12. СТАТИСТИКА 
+   ========================================= */
 .profile-stats-row {
   display: flex;
   gap: 30px;
@@ -733,7 +744,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   11. ФОРМА ДОБАВЛЕНИЯ (ADD IDIOM PAGE)
+   13. ФОРМА ДОБАВЛЕНИЯ (ADD IDIOM PAGE)
    ========================================= */
 
 .add-idiom-container {
@@ -765,7 +776,6 @@ h1, h2, h3, .navbar-brand a {
   gap: 20px;
 }
 
-/* Стилизация подписей к полям */
 .form-label {
   font-weight: 700;
   color: #636e72;
@@ -797,7 +807,13 @@ h1, h2, h3, .navbar-brand a {
   transform: translateY(-2px);
 }
 
-/* Стилизация выпадающего списка (категорий) */
+
+.add-idiom-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end; 
+}
+
 .add-idiom-select {
   cursor: pointer;
   appearance: none; 
@@ -812,7 +828,6 @@ h1, h2, h3, .navbar-brand a {
   resize: vertical;
 }
 
-/* Кнопка "Сохранить"  */
 .add-idiom-button {
   margin-top: 10px;
   padding: 20px;
@@ -843,8 +858,12 @@ h1, h2, h3, .navbar-brand a {
   opacity: 0.7;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 /* =========================================
-   12. КВИЗ 
+   14. КВИЗ 
    ========================================= */
 
 .quiz-container {
@@ -1004,7 +1023,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   13. TRAINING.JSX
+   15. TRAINING.JSX
    ========================================= */
 
   .training-wrapper {
@@ -1186,9 +1205,9 @@ h1, h2, h3, .navbar-brand a {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* TASK BOX IN TRAINING SECTION */
-
-/* Верхняя панель (Категория + Счетчик) */
+/* =========================================
+   16.  TASK BOX IN TRAINING SECTION 
+   ========================================= */
 .training-header {
   display: flex;
   flex-direction: column; 
@@ -1241,7 +1260,6 @@ h1, h2, h3, .navbar-brand a {
   overflow: hidden;
 }
 
-
 .progress-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, #646cff 0%, #4a90e2 100%);
@@ -1249,7 +1267,7 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   15. СТИЛИ УРОВНЕЙ (LEVELING SYSTEM)
+   17. СТИЛИ УРОВНЕЙ (LEVELING SYSTEM)
    ========================================= */
 .profile-name-row {
   display: flex;
@@ -1281,7 +1299,7 @@ h1, h2, h3, .navbar-brand a {
 .level-legend { background: linear-gradient(135deg, #f1c40f, #f39c12); box-shadow: 0 0 15px rgba(241, 196, 15, 0.4); } 
 
 /* =========================================
-   16. ТАБЛИЦА ЛИДЕРОВ (LEADERBOARD)
+   18. ТАБЛИЦА ЛИДЕРОВ (LEADERBOARD)
    ========================================= */
 .leaderboard-wrapper {
   max-width: 800px;
@@ -1420,11 +1438,9 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-   16. Бургер меню
+   19. Бургер меню
    ========================================= */
 
-
-/* Иконка */
 .burger-icon {
   display: none; 
   flex-direction: column;
@@ -1451,10 +1467,8 @@ h1, h2, h3, .navbar-brand a {
 
 
 /* =========================================
-   16. Loader
+   20. Loader 
    ========================================= */
-
-/* Контейнер на весь экран */
 .loader-container {
   position: fixed;
   top: 0;
@@ -1466,7 +1480,7 @@ h1, h2, h3, .navbar-brand a {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeInEffect 0.5s ease-out;
+  animation: fadeInEffect 0.5s ease-out; 
 }
 
 .loader-content {
@@ -1482,61 +1496,6 @@ h1, h2, h3, .navbar-brand a {
   margin-bottom: 30px;
   filter: drop-shadow(0 0 15px rgba(118, 74, 188, 0.2));
   animation: pulseBrain 1.5s ease-in-out infinite;
-}
-
-/* Стили для текста идиом */
-.loader-text {
-  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #333;
-  margin: 10px 0;
-  min-height: 1.6em; 
-  letter-spacing: 0.5px;
-}
-
-/* Мигающий курсор  */
-.cursor {
-  display: inline-block;
-  width: 3px;
-  background-color: #764abc; 
-  margin-left: 5px;
-  animation: blink 0.8s step-end infinite;
-}
-
-.progress-bar {
-  width: 280px;
-  height: 4px;
-  background-color: #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 40px;
-}
-
-.loader-rus.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.progress-fill {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #764abc, #61dafb, #764abc);
-  background-size: 200% 100%;
-  animation: shimmerEffect 2s linear infinite;
-}
-
-/* Анимации */
-
-/* Пульсация иконки */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
-.loader-container {
-  animation: fadeIn 0.5s ease-out;
 }
 
 .loader-text-wrapper {
@@ -1567,249 +1526,260 @@ h1, h2, h3, .navbar-brand a {
   transition: all 0.6s ease;
 }
 
+.loader-rus.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .cursor {
   display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background-color: #764abc; 
   margin-left: 5px;
-  color: #764abc;
   animation: blinkCursor 0.8s step-end infinite;
 }
 
-@keyframes slideFade {
-  0% {
-    opacity: 0;
-    transform: translateY(15px);
-    filter: blur(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+.progress-bar {
+  width: 280px;
+  height: 4px;
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 40px;
 }
 
-@keyframes blinkCursor {
-  from, to { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-@keyframes pulseBrain {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-@keyframes shimmerEffect {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-@keyframes fadeInEffect {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.progress-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #764abc, #61dafb, #764abc);
+  background-size: 200% 100%;
+  animation: shimmerEffect 2s linear infinite;
 }
 
 /* =========================================
-   17. Анимация GSAP
+   21. Анимация GSAP и Обертки
    ========================================= */
-
 .main-wrapper {
   opacity: 0; 
   width: 100%;
   min-height: 100vh;
 }
 
-.main-wrapper.is-loading {
-  display: none;
-}
-
 .main-wrapper.is-ready {
   display: block;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-/* Контейнер для роутов */
-.app-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Плавный вход для отдельных страниц внутри роутов */
 .fade-in {
-  animation: fadeIn 0.5s ease-in forwards;
+  animation: fadeInKeyframe 0.5s ease-in forwards;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (min-width: 769px) {
+  .navbar-links {
+    display: flex !important;
+    position: static !important;
+    transform: none !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .burger-icon, .nav-overlay {
+    display: none !important;
+  }
 }
 
 /* =========================================
-   АДАПТИВНОСТЬ (768px)
+  22. АДАПТИВНОСТЬ (768px)
    ========================================= */
-
 @media (max-width: 768px) {
   .app-container {
     padding: 10px;
     overflow-x: hidden;
   }
 
-  .navbar { padding: 10px 20px; }
-  .navbar-links { gap: 15px; }
+  .navbar { padding: 15px 20px; }
 
-  /* Профиль: Главная карточка */
-  .profile-user-card {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding: 25px 15px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    gap: 20px !important;
-  }
-
-  .profile-avatar-container { margin-right: 0 !important; }
-  .profile-main-avatar { width: 90px; height: 90px; }
-
-  .profile-info { width: 100% !important; }
+  .navbar-links:not(.show) {
+    display: none !important; 
   
-  .profile-name-row {
-    flex-direction: column !important;
-    gap: 10px;
-    margin-bottom: 5px;
   }
-
-  /* ФИКС ПОЧТЫ:*/
-  .profile-email-text {
-    font-size: clamp(0.9rem, 3.5vw, 1rem) !important;
-    color: #666;
-    word-break: break-all !important;
-    white-space: normal !important;
-    max-width: 100% !important;
-    margin: 0 0 20px 0 !important;
-    display: block !important;
-  }
-
-   .burger-icon {
+  .burger-icon {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 2500;
   }
+
+  .burger-icon span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Трансформация бургера */
+  .burger-icon.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: #ff4d4f; }
+  .burger-icon.open span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+  .burger-icon.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: #ff4d4f; }
 
   .navbar-links {
     position: fixed;
     top: 0;
-    right: -100%; 
+    right: -100%;
     width: 280px;
     height: 100vh;
-    background: #ffffff;
+    background: white;
     flex-direction: column;
-    padding: 80px 30px;
-    gap: 20px;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-    z-index: 1500;
-    align-items: flex-start; 
-  }
-
-  .navbar-links.show {
-    right: 0;
-  }
-
-  .navbar-links li {
-    width: 100%;
-  }
-
-  .nav-user-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 100px 30px 40px;
     gap: 15px;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
+  }
+.navbar-links a {
+    font-size: 1.4rem !important; 
+    font-weight: 700 !important;
+    color: #636e72 !important;
+    padding: 12px 0;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .navbar-brand a {
+    font-size: 1.5rem;
+  }
+  .navbar-links.show {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 280px !important;
+    height: 100vh !important;
+    background: white !important;
+    flex-direction: column !important;
+    padding: 100px 30px 40px !important;
+    z-index: 2000 !important;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1) !important;
+    animation: slideInMenu 0.3s ease-out;
   }
 
-  /* Затемнение фона */
-  .nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 1400;
-  }
-}
-
-.navbar-links.show li {
-  animation: slideInNav 0.4s ease forwards;
-  opacity: 0; 
-}
-
-
-@keyframes slideInNav {
-  from { 
-    transform: translateX(30px); 
+  .navbar-links.show li {
+    animation: slideInNav 0.4s ease forwards;
     opacity: 0; 
   }
-  to { 
-    transform: translateX(0); 
-    opacity: 1; 
+
+  /* задержки для ссылок */
+  .navbar-links.show li:nth-child(1) { animation-delay: 0.1s; }
+  .navbar-links.show li:nth-child(2) { animation-delay: 0.15s; }
+  .navbar-links.show li:nth-child(3) { animation-delay: 0.2s; }
+  .navbar-links.show li:nth-child(4) { animation-delay: 0.25s; }
+  .navbar-links.show li:nth-child(5) { animation-delay: 0.3s; }
+  .navbar-links.show li:nth-child(6) { animation-delay: 0.35s; }
+
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1500;
   }
-}
 
-.navbar-links.show li:nth-child(1) { animation-delay: 0.1s; }
-.navbar-links.show li:nth-child(2) { animation-delay: 0.2s; }
-.navbar-links.show li:nth-child(3) { animation-delay: 0.3s; }
-.navbar-links.show li:nth-child(4) { animation-delay: 0.4s; }
-.navbar-links.show li:nth-child(5) { animation-delay: 0.3s; }
-.navbar-links.show li:nth-child(6) { animation-delay: 0.4s; }
-.navbar-links.show li:nth-child(7) { animation-delay: 0.4s; }
-
-  /* СТАТИСТИКА */
-  .profile-stats-row {
-    display: flex !important;
+  /* Профиль */
+  .profile-user-card {
     flex-direction: column !important;
-    gap: 10px !important;
+    padding: 25px 15px !important;
+  }
+
+  .profile-email-text {
+    font-size: 0.9rem !important;
+    word-break: break-all;
+    white-space: normal;
+    margin-bottom: 20px !important;
+  }
+
+  .profile-stats-row {
+    flex-direction: column !important;
     width: 100% !important;
   }
 
   .stat-item {
-    display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
-    align-items: center !important;
-    background: #f8f9fa !important;
-    padding: 12px 15px !important;
-    border-radius: 12px !important;
-    border: 1px solid #eee !important;
     width: 100% !important;
-    box-sizing: border-box !important;
   }
+}
 
-  .stat-label {
-    font-size: 0.9rem !important;
-    flex: 1;
-    text-align: left !important;
-  }
+@keyframes fadeInEffect { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInKeyframe { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseBrain { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes blinkCursor { from, to { opacity: 0; } 50% { opacity: 1; } }
+@keyframes shimmerEffect { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@keyframes slideInNav { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideInMenu {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
-  .stat-value {
-    font-size: 1.3rem !important;
-    font-weight: 800 !important;
-    margin: 0 !important;
-  }
-
-  /* Тренажеры */
-  .training-image-container, .random-image-wrapper { height: 200px; }
-  .sentence-display { font-size: 1.2rem; }
 
 
 /* МОБИЛЬНАЯ АДАПТИВНОСТЬ (480px) */
-@media (max-width: 480px) {
+@media (max-width: 450px) {
   .profile-main-avatar { width: 75px; height: 75px; }
-  .profile-name { font-size: 1.4rem !important; }
+  .profile-email-text {
+    width: 100% !important;
+    font-size: 0.9rem !important;
+    word-break: break-all !important;
+    white-space: normal !important;
+  }
+  .profile-avatar-container {
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+ .profile-name {
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    margin: 15px 0 10px 0 !important;
   
+    word-break: break-all !important; 
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+  }
+  .profile-user-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
+    padding: 30px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
   .idioms-grid {
     grid-template-columns: 1fr !important;
     gap: 15px;
   }
-
-  .stat-item { padding: 10px 12px !important; }
+.profile-stats-row {
+    width: 100% !important;
+    margin-top: 20px !important;
+  }
+ .stat-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #eee !important;
+  }
   .stat-value { font-size: 1.1rem !important; }
 }
