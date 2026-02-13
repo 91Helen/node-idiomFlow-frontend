@@ -1,9 +1,9 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import { Toaster } from 'react-hot-toast';
 import { gsap } from 'gsap';
-
 
 import { useGetIdiomsQuery } from './features/apiSlice'; 
 import Navbar from './components/Navbar';
@@ -36,7 +36,7 @@ function App() {
       const tl = gsap.timeline({
         onComplete: () => {
           setIsAnimationFinished(true);
-         
+          
           gsap.set(contentRef.current, { clearProps: "all" });
         }
       });
@@ -54,23 +54,22 @@ function App() {
         position="top-center" 
         reverseOrder={false}
         gutter={8}
-        containerStyle={{
-          zIndex: 999999, 
-        }}
+        containerClassName="toaster-container"
         toastOptions={{
-          duration: 2000,
-          style: {
-            background: '#333',
-            color: '#fff',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          className: 'custom-toast',
+          duration: 1000,
+  
+          success: {
+            className: 'custom-toast',
+          },
+          error: {
+            className: 'custom-toast',
           },
         }}
       />
 
       {(!isAnimationFinished || isLoading) && <Loader />}
-
-     
+      
       <div 
         ref={contentRef} 
         className={`main-wrapper ${isLoading ? 'is-loading' : 'is-ready'}`}
@@ -80,6 +79,7 @@ function App() {
         <div className="app-container">
           <Routes>
             <Route path="/" element={<Home idioms={idioms} />} />
+            <Route path="/random" element={<RandomIdiom idioms={idioms} />} />
             <Route path="/random" element={<RandomIdiom idioms={idioms} />} />
             <Route path="/training" element={<Training idioms={idioms} />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
