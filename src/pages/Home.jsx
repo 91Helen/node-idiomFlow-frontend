@@ -33,7 +33,6 @@ const Home = () => {
     idiom.meaning.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
   const handleDelete = (id) => {
     toast((t) => (
       <div className="toast-confirm-container">
@@ -43,15 +42,13 @@ const Home = () => {
             className="toast-btn toast-btn-delete"
             onClick={async () => {
               toast.dismiss(t.id);
-              const accessToken = await getAccessTokenSilently(); 
-              toast.promise(
-                deleteIdiom({ id, token: accessToken }).unwrap(),
-                {
-                  loading: 'Удаляем...',
-                  success: <b>Удалено успешно!</b>,
-                  error: <b>Ошибка удаления 😕</b>,
-                }
-              );
+              try {
+                const accessToken = await getAccessTokenSilently(); 
+                await deleteIdiom({ id, token: accessToken }).unwrap();
+                
+              } catch (err) {
+                console.error("Ошибка при удалении:", err);
+              }
             }}
           >
             Да
@@ -67,7 +64,7 @@ const Home = () => {
     ), {
       duration: 5000,
       position: 'bottom-center',
-      className: 'custom-toast-wrapper',
+      id: 'confirm-delete-home', 
     });
   };
 
