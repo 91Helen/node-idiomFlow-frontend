@@ -252,30 +252,36 @@ h1, h2, h3, .navbar-brand a {
 }
 
 /* =========================================
-  5.  TOASTER
+   СТИЛИ УВЕДОМЛЕНИЙ (TOASTS)
    ========================================= */
-.custom-toast-wrapper {
-  background: #2c2c2c !important;
-  color: #fff !important;
-  border-radius: 16px !important;
-  padding: 12px !important;
-  border: 1px solid #444 !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+
+.toaster-container {
+  z-index: 999999 !important;
 }
 
+.custom-toast {
+  background: #333 !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+  font-family: 'Inter', sans-serif !important;
+  padding: 12px 20px !important;
+  border: 1px solid #444 !important;
+  font-size: 0.95rem;
+}
 
 .toast-confirm-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .toast-confirm-text {
   margin: 0;
   font-weight: 600;
-  font-size: 0.95rem;
+  text-align: center;
 }
 
 .toast-confirm-actions {
@@ -284,7 +290,6 @@ h1, h2, h3, .navbar-brand a {
   width: 100%;
 }
 
-/* Общие стили кнопок в тосте */
 .toast-btn {
   flex: 1;
   border: none;
@@ -292,7 +297,7 @@ h1, h2, h3, .navbar-brand a {
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.2s ease;
 }
 
@@ -315,10 +320,43 @@ h1, h2, h3, .navbar-brand a {
   background-color: #5a5a5a;
 }
 
-.toast-btn:active {
-  transform: translateY(0);
+/* =========================================
+   ОБЕРТКА ПРИЛОЖЕНИЯ И АНИМАЦИИ
+   ========================================= */
+
+.main-wrapper {
+  width: 100%;
+  min-height: 100vh;
 }
 
+
+.main-wrapper.is-loading {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+
+.main-wrapper.is-ready {
+  visibility: visible !important;
+}
+
+.fade-in {
+  animation: fadeInKeyframe 0.5s ease forwards;
+}
+
+@keyframes fadeInKeyframe {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
 /* =========================================
    6. ТРЕНАЖЕР (RANDOM IDIOM) 
    ========================================= */
