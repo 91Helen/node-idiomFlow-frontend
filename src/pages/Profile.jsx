@@ -3,6 +3,7 @@ import { useGetIdiomsQuery, useDeleteIdiomMutation } from "../features/apiSlice"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import IdiomCard from "../components/IdiomCard";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading: authLoading, getAccessTokenSilently } = useAuth0();
@@ -47,14 +48,41 @@ const Profile = () => {
   const myIdioms = idioms?.filter(idiom => idiom.userId === user?.sub);
   const levelInfo = getLevelInfo(dbUser?.totalPoints || 0);
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Вы уверены, что хотите удалить эту идиому?")) {
-      try {
-        await deleteIdiom({ id, token }).unwrap();
-      } catch (err) {
-        console.error("Failed to delete:", err);
-      }
-    }
+
+  const handleDelete = (id) => {
+    toast((t) => (
+      <div className="toast-confirm-container">
+        <p className="toast-confirm-text">Удалить эту идиому? 🗑️</p>
+        <div className="toast-confirm-actions">
+          <button
+            className="toast-btn toast-btn-delete"
+            onClick={async () => {
+              toast.dismiss(t.id);
+              toast.promise(
+                deleteIdiom({ id, token }).unwrap(),
+                {
+                  loading: 'Удаляем...',
+                  success: <b>Удалено успешно!</b>,
+                  error: <b>Не удалось удалить 😕</b>,
+                }
+              );
+            }}
+          >
+            Да
+          </button>
+          <button
+            className="toast-btn toast-btn-cancel"
+            onClick={() => toast.dismiss(t.id)}
+          >
+            Нет
+          </button>
+        </div>
+      </div>
+    ), {
+      duration: 5000,
+      position: 'bottom-center',
+      className: 'custom-toast-wrapper',
+    });
   };
 
   if (authLoading || dataLoading) return <div className="loader">Загрузка профиля...</div>;
