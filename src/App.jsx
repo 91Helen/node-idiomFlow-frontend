@@ -28,15 +28,17 @@ const ProtectedProfile = withAuthenticationRequired(Profile, {
 
 function App() {
   const { data: idioms = [], isLoading } = useGetIdiomsQuery();
-  
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const contentRef = useRef(null);
 
   useEffect(() => {
     if (!isLoading) {
-     
       const tl = gsap.timeline({
-        onComplete: () => setIsAnimationFinished(true)
+        onComplete: () => {
+          setIsAnimationFinished(true);
+         
+          gsap.set(contentRef.current, { clearProps: "all" });
+        }
       });
 
       tl.fromTo(contentRef.current, 
@@ -48,27 +50,33 @@ function App() {
 
   return (
     <Router>
-   
+      <Toaster 
+        position="top-center" 
+        reverseOrder={false}
+        gutter={8}
+        containerStyle={{
+          zIndex: 999999, 
+        }}
+        toastOptions={{
+          duration: 2000,
+          style: {
+            background: '#333',
+            color: '#fff',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          },
+        }}
+      />
+
       {(!isAnimationFinished || isLoading) && <Loader />}
 
+     
       <div 
         ref={contentRef} 
         className={`main-wrapper ${isLoading ? 'is-loading' : 'is-ready'}`}
       >
         <Navbar />
         
-        <Toaster 
-          position="top-center" 
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#363636',
-              color: '#fff',
-              borderRadius: '12px',
-            },
-          }}
-        />
-
         <div className="app-container">
           <Routes>
             <Route path="/" element={<Home idioms={idioms} />} />
