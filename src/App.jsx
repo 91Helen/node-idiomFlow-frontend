@@ -35,7 +35,6 @@ function App() {
       const tl = gsap.timeline({
         onComplete: () => {
           setIsAnimationFinished(true);
-          
           gsap.set(contentRef.current, { clearProps: "all" });
         }
       });
@@ -56,13 +55,9 @@ function App() {
         containerClassName="toaster-container"
         toastOptions={{
           className: 'custom-toast',
-          duration: 1000,
-  
-          success: {
-            className: 'custom-toast',
-          },
-          error: {
-            className: 'custom-toast',
+          duration: 2000, 
+          style: {
+            pointerEvents: 'auto', 
           },
         }}
       />
@@ -78,7 +73,6 @@ function App() {
         <div className="app-container">
           <Routes>
             <Route path="/" element={<Home idioms={idioms} />} />
-            <Route path="/random" element={<RandomIdiom idioms={idioms} />} />
             <Route path="/random" element={<RandomIdiom idioms={idioms} />} />
             <Route path="/training" element={<Training idioms={idioms} />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
