@@ -256,18 +256,20 @@ h1, h2, h3, .navbar-brand a {
    ========================================= */
 
 .toaster-container {
-  z-index: 999999 !important;
+z-index: 999999 !important;
+  pointer-events: none;
 }
 
 .custom-toast {
-  background: #333 !important;
-  color: #fff !important;
+ background: #333333 !important;
+  color: #ffffff !important; 
   border-radius: 12px !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
   font-family: 'Inter', sans-serif !important;
   padding: 12px 20px !important;
-  border: 1px solid #444 !important;
-  font-size: 0.95rem;
+  border: 1px solid #444444 !important;
+  font-size: 0.95rem !important;
+  pointer-events: auto !important;
 }
 
 .toast-confirm-container {
