@@ -9,7 +9,7 @@ export const idiomsApi = createApi({
   tagTypes: ['Idioms', 'Leaderboard'], 
 
   endpoints: (builder) => ({
-    // 1. Получение всех идиом (публичные + свои)
+   
     getIdioms: builder.query({
       query: (token) => ({
         url: 'idioms',
@@ -22,8 +22,8 @@ export const idiomsApi = createApi({
           : ['Idioms'],
     }),
 
-    // 2. ПОЛУЧЕНИЕ РЕЙТИНГА (Leaderboard)
- 
+    //  ПОЛУЧЕНИЕ РЕЙТИНГА (Leaderboard)
+  
     getLeaderboard: builder.query({
       query: (token) => ({
         url: 'users/leaderboard',
@@ -33,7 +33,7 @@ export const idiomsApi = createApi({
       providesTags: ['Leaderboard'],
     }),
 
-    // 3. Добавление новой идиомы
+   
     addIdiom: builder.mutation({
       query: ({ body, token }) => ({
         url: 'idioms',
@@ -46,7 +46,7 @@ export const idiomsApi = createApi({
       invalidatesTags: ['Idioms'],
     }),
 
-    // 4. Удаление идиомы
+  
     deleteIdiom: builder.mutation({
       query: ({ id, token }) => ({
         url: `idioms/${id}`,
@@ -66,4 +66,3 @@ export const {
   useAddIdiomMutation, 
   useDeleteIdiomMutation 
 } = idiomsApi;
-
