@@ -1672,6 +1672,7 @@ h1, h2, h3, .navbar-brand a {
 
   .navbar-links {
     position: fixed;
+    justify-content: flex-start;
     top: 0;
     right: -100%;
     width: 280px;
@@ -1684,7 +1685,7 @@ h1, h2, h3, .navbar-brand a {
     z-index: 2000;
   }
 .navbar-links a {
-    font-size: 1.4rem !important; 
+    font-size: 1.0rem !important; 
     font-weight: 700 !important;
     color: #636e72 !important;
     padding: 12px 0;
@@ -1692,6 +1693,48 @@ h1, h2, h3, .navbar-brand a {
     -webkit-font-smoothing: antialiased;
   }
   
+  .nav-user-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f2f6; 
+  }
+
+  .nav-profile-link {
+    display: flex !important;
+    flex-direction: row !important; 
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    width: auto;
+  }
+
+  .nav-username {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #636e72 !important;
+    white-space: nowrap !important; 
+    margin: 0 !important;
+  } 
+
+  .nav-avatar, .nav-avatar-placeholder {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  .auth-btn.logout {
+    margin: 0 !important;
+    width: 100%;
+    text-align: center;
+    padding: 10px !important;
+    font-size: 0.9rem !important;
+  }
+
   .navbar-brand a {
     font-size: 1.5rem;
   }
